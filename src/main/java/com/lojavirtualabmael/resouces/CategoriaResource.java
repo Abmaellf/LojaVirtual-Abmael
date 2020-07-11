@@ -22,8 +22,8 @@ import com.lojavirtualabmael.domain.Categoria;
 import com.lojavirtualabmael.dto.CategoriaDTO;
 import com.lojavirtualabmael.service.CategoriaService;
 
+//@CrossOrigin("${origem-permitida}")
 @RestController
-@CrossOrigin("${origem-permitida}")
 @RequestMapping(value="/categorias")
 public class CategoriaResource {
 	
