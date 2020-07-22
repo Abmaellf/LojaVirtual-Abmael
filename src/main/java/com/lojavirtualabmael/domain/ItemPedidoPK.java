@@ -21,10 +21,6 @@ public class ItemPedidoPK implements Serializable{
 	
 	
 	
-	
-	
-	
-	
 	public Pedido getPedido() {
 		return pedido;
 	}
