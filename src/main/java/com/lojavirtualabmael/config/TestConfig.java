@@ -10,6 +10,7 @@ import org.springframework.context.annotation.Profile;
 import com.lojavirtualabmael.service.DBService;
 import com.lojavirtualabmael.service.EmailService;
 import com.lojavirtualabmael.service.MockEmailService;
+import com.lojavirtualabmael.service.SmtpEmailService;
 
 @Configuration
 @Profile("test")
@@ -28,4 +29,11 @@ public class TestConfig {
 	public EmailService emailService(){
 		return new MockEmailService();
 	}
+	
+
+/*@Bean
+	public EmailService emailService(){
+		return new SmtpEmailService();
+	}
+*/
 }
