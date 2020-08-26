@@ -18,12 +18,14 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.lojavirtualabmael.dto.CredenciaisDTO;
+import com.lojavirtualabmael.security.JWTUtil;
 
 public class JWTAuthenticationFilter extends UsernamePasswordAuthenticationFilter  {
 	
 	private AuthenticationManager authenticationManager; 
 	
 	private JWTUtil jwtUtil;
+	
 	
 	public JWTAuthenticationFilter(AuthenticationManager authenticationManager, JWTUtil jwTUtil) {
 		setAuthenticationFailureHandler(new JWTAuthenticationFailureHandler());

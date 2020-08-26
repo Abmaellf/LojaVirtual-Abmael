@@ -11,7 +11,6 @@ import org.springframework.data.domain.Sort.Direction;
 import org.springframework.stereotype.Service;
 
 import com.lojavirtualabmael.domain.Categoria;
-import com.lojavirtualabmael.domain.Cliente;
 import com.lojavirtualabmael.dto.CategoriaDTO;
 import com.lojavirtualabmael.repository.CategoriaRepository;
 import com.lojavirtualabmael.service.exception.DataIntegrityException;

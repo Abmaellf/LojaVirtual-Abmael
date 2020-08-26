@@ -9,6 +9,7 @@ import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -17,9 +18,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
-import com.lojavirtualabmael.domain.Categoria;
+
 import com.lojavirtualabmael.domain.Cliente;
-import com.lojavirtualabmael.dto.CategoriaDTO;
 import com.lojavirtualabmael.dto.ClienteDTO;
 import com.lojavirtualabmael.dto.ClienteNewDTO;
 import com.lojavirtualabmael.service.ClienteService;
@@ -64,6 +64,7 @@ public class ClienteResource {
 			return ResponseEntity.noContent().build();
 		}
 		
+		@PreAuthorize("hasAnyRole('ADMIN')")
 		@RequestMapping(value="/{id}", method = RequestMethod.DELETE)
 		public ResponseEntity<Void> delete(@PathVariable Integer id) {
 			servico.delete(id);
@@ -72,7 +73,7 @@ public class ClienteResource {
 			
 		}
 		
-		
+		@PreAuthorize("hasAnyRole('ADMIN')")
 		@RequestMapping(method = RequestMethod.GET)
 		public ResponseEntity <List<ClienteDTO>> findAll() {
 			List<Cliente> lista = servico.findAll();
@@ -82,7 +83,7 @@ public class ClienteResource {
 			
 		}
 		
-
+		@PreAuthorize("hasAnyRole('ADMIN')")
 		@RequestMapping(value="pages", method = RequestMethod.GET)
 		public ResponseEntity <Page<ClienteDTO>> findAPage(
 
