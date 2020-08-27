@@ -15,11 +15,14 @@ import org.springframework.transaction.annotation.Transactional;
 import com.lojavirtualabmael.domain.Cidade;
 import com.lojavirtualabmael.domain.Cliente;
 import com.lojavirtualabmael.domain.Endereco;
+import com.lojavirtualabmael.domain.enuns.Perfil;
 import com.lojavirtualabmael.domain.enuns.TipoCliente;
 import com.lojavirtualabmael.dto.ClienteDTO;
 import com.lojavirtualabmael.dto.ClienteNewDTO;
 import com.lojavirtualabmael.repository.ClienteRepository;
 import com.lojavirtualabmael.repository.EnderecoRepository;
+import com.lojavirtualabmael.security.UserSS;
+import com.lojavirtualabmael.service.exception.AuthorizationException;
 import com.lojavirtualabmael.service.exception.DataIntegrityException;
 import com.lojavirtualabmael.service.exception.ObjectNotFoundException;
 
@@ -39,6 +42,12 @@ public class ClienteService {
 	
 	
 	public Cliente find(Integer id) {
+		
+		UserSS user = UserService.authenticated();
+		if(user == null || !user.hasRole(Perfil.ADMIN) && !id.equals(user.getId()) ) {
+			throw new AuthorizationException("Acesso negado");
+		}
+
 		Optional<Cliente>  obj = repo.findById(id);
 		if(obj == null) {
 			
