@@ -4,8 +4,12 @@ import java.util.Date;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort.Direction;
 import org.springframework.stereotype.Service;
 
+import com.lojavirtualabmael.domain.Cliente;
 import com.lojavirtualabmael.domain.ItemPedido;
 import com.lojavirtualabmael.domain.PagamentoComBoleto;
 import com.lojavirtualabmael.domain.Pedido;
@@ -13,6 +17,8 @@ import com.lojavirtualabmael.domain.enuns.EstadoPagamento;
 import com.lojavirtualabmael.repository.ItemPedidoRepository;
 import com.lojavirtualabmael.repository.PagamentoRepository;
 import com.lojavirtualabmael.repository.PedidoRepository;
+import com.lojavirtualabmael.security.UserSS;
+import com.lojavirtualabmael.service.exception.AuthorizationException;
 import com.lojavirtualabmael.service.exception.ObjectNotFoundException;
 
 @Service
@@ -50,6 +56,8 @@ public class PedidoService {
 				"Objeto não encontrado! Id: " + id + ", Tipo: " + Pedido.class.getName()));
 	}
 	
+	
+	
 	public Pedido insert(Pedido obj) {
 		obj.setId(null);
 		obj.setInstante(new Date());
@@ -81,6 +89,26 @@ public class PedidoService {
 		
 		return obj;
 		
+	}
+	
+	
+	
+	public Page<Pedido> findPage(Integer page, Integer linesPerPage, String orderBy, String direction){
+		
+		UserSS user = UserService.authenticated();
+		if (user == null) {
+		 			 throw new AuthorizationException("Acesso Negado") ;
+		}
+
+		
+		PageRequest pageRequest = PageRequest.of(page, linesPerPage, Direction.valueOf(direction), orderBy);
+		
+		Cliente cliente = clienteService.find(user.getId());
+				
+		return repo.findByCliente(cliente, pageRequest);
+		
+		
+				
 	}
 
 }

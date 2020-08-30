@@ -52,6 +52,8 @@ public class CategoriaResource {
 			
 		}
 		
+		
+		
 		@PreAuthorize("hasAnyRole('ADMIN')")
 		@RequestMapping(value="/{id}", method = RequestMethod.PUT)
 		public ResponseEntity<Categoria> update(@Valid @RequestBody CategoriaDTO objDTO, @PathVariable Integer id) {
@@ -61,6 +63,8 @@ public class CategoriaResource {
 			obj = servico.update(obj);
 			return ResponseEntity.noContent().build();
 		}
+		
+		
 		
 		@PreAuthorize("hasAnyRole('ADMIN')")
 		@RequestMapping(value="/{id}", method = RequestMethod.DELETE)
@@ -80,6 +84,7 @@ public class CategoriaResource {
 			return ResponseEntity.ok().body(listaDTO);
 			
 		}
+		
 		
 
 		@RequestMapping(value="pages", method = RequestMethod.GET)
