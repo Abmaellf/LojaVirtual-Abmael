@@ -52,7 +52,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 		private static final String[] PUBLIC_MATCHERS_POST = {
 				/*Esse é possível acessar sem autenticação e somente o metodo POST*/
 				"/clientes/",
-				"/clientes/picture",
 				"/auth/forgot/**"
 		};
 	 
