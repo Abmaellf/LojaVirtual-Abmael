@@ -89,11 +89,13 @@
 			<artifactId>aws-java-sdk</artifactId>
 			<version>LATEST</version>
 		</dependency>
+		
 		<dependency>
-			<groupId>com.amazonaws</groupId> 
-			<artifactId>aws-java-sdk</artifactId>
+			<groupId>commons-io</groupId> 
+			<artifactId>commons-io</artifactId>
 			<version>LATEST</version>
 		</dependency>
+
 		
 		
 		
