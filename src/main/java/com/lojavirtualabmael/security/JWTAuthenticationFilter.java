@@ -67,6 +67,9 @@ public class JWTAuthenticationFilter extends UsernamePasswordAuthenticationFilte
 
 	}
 	
+	
+	
+	
 	private class JWTAuthenticationFailureHandler implements AuthenticationFailureHandler {
 		
 		
